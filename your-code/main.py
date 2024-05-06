@@ -1,72 +1,105 @@
 #1. Import the NUMPY package under the name np.
 
-#[your code here]
+
+import numpy as np
 
 
 #2. Print the NUMPY version and the configuration.
 
-#[your code here]
+print(np.version.version)
 
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
-#[your code here]
+a = np.random.random((2,3,5)) #generates values from the standard normal distribution (mean 0, standard deviation 1)
+a_1 = np.random.rand(2,3,5) #generates values uniformly between 0 and 1
+a_2 = np.random.randn(2,3,5) #equivalent to rand()
+print(f'this is A:\n {a}')
+print(f'this is B:\n {a_1}')
+print(f'this is C:\n {a_2}')
+
+
 
 #4. Print a.
+print(f'this is A:\n {a}')
 
-#[your code here]
+
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
-#[your code here]
+b = np.ones((5,2,3))
+
 
 #6. Print b.
 
-#[your code here]
+print(f'this is B:\n {b}')
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
-#[your code here]
+shape_a = np.shape(a)
+shape_b = np.shape(b)
+
+print(shape_a)
+print(shape_b)
+
+if shape_a == shape_b:
+        print("same shape")
+else:
+        print("different shapes")
 
 #8. Are you able to add a and b? Why or why not?
 
-#[your code here]
-
+result = a + b
+#different shapes
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
-#[your code here]
-
+c = np.transpose(b,(1,2,0))
+a.shape
+b.shape
+c.shape
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
-#[your code here]
+d = np.add(a,c)
+print(d)
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-#[your code here]
+print('This is A: \n')
+print(a)
+
+print('This is D: \n')
+print(d)
 
 
 #12. Multiply a and c. Assign the result to e.
 
-#[your code here]
-
+e = np.multiply(a,c)
+print(e)
 
 #13. Does e equal to a? Why or why not?
 
-#[your code here]
-
+np.array_equal(e,a)
+#Yes, E equals A because each element of A was multiplied by 1 (corresponding element in c, after transposition).
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
-#[your code here]
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
+
+print(d_max)
+print(d_min)
+print(d_mean)
 
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-#[your code here]
-
+d.shape
+f = np.empty_like(d)
+f.shape
 
 """
 #16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
@@ -78,7 +111,13 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
-#[your code here]
+#using boolean indexing:
+
+f[(d > d_min) & (d < d_mean)] = 25
+f[(d > d_mean) & (d < d_max)] = 75
+f[d == d_mean] = 50
+f[d == d_min] = 0
+f[d == d_max] = 100
 
 
 
@@ -104,9 +143,11 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
 
-#[your code here]
+print("D array:\n\n:")
+print(d)
 
-
+print("F array:\n\n:")
+print(f)
 
 """
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
@@ -121,4 +162,12 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
 Again, you don't need Numpy in this question.
 """
 
-#[your code here]
+f_string = f.astype(str)
+
+f_string[f_string =='0'] = 'A'
+f_string[f_string =='25.0'] = 'B'
+f_string[f_string =='50.0'] = 'C'
+f_string[f_string =='75.0'] = 'D'
+f_string[f_string =='100.0'] = 'E'
+
+print(f_string)
