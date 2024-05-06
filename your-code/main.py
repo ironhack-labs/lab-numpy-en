@@ -194,5 +194,5 @@ for i in range(d.shape[0]):
                 f[i, j, k] = label_letters[25]
             else:
                 f[i, j, k] = label_letters[75]
-
+#does not work correctly, issie on float 
 print(f)
