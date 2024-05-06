@@ -1,72 +1,100 @@
 #1. Import the NUMPY package under the name np.
 
-#[your code here]
+import numpy as np
 
 
 #2. Print the NUMPY version and the configuration.
 
-#[your code here]
+print("NumPy version:", np.__version__)
+print("\nNumPy configuration:")
+print(np.show_config())
 
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
-#[your code here]
+a = np.random.random((2,3,5))
 
 #4. Print a.
+
+print(a)
 
 #[your code here]
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
-#[your code here]
+b =  np.ones((5,2,3))
 
 #6. Print b.
 
-#[your code here]
+print(b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
-#[your code here]
+# the size of array 'a'
+size_a = a.size
+
+# the size of array 'b'
+size_b = a.size
+
+# Check if equal
+if size_a == size_b:
+    print("Arrays a and b have the same size.")
+else:
+    print("Arrays a and b do not have the same size.")
 
 #8. Are you able to add a and b? Why or why not?
 
-#[your code here]
+"""We cannot add a and b as they have different shape. We would need to reshape one of them to match the shape of the other to add them."""
 
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
-#[your code here]
+c = np.transpose(b, (1,2,0))
+
+print(c)
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
-#[your code here]
+d = a + c
+
+"""We have changed the shape of array b to match the shape of the array a as we can only add arrays of the same shape """
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-#[your code here]
+print(a)
+print(d)
+
+"""A has values before addition, d is the result of addition of a and c so the values are increased by 1.0"""
 
 
 #12. Multiply a and c. Assign the result to e.
 
-#[your code here]
+e = a * c
+
 
 
 #13. Does e equal to a? Why or why not?
 
-#[your code here]
+equal_result = (e == a)
+print("Equality Comparison Result:")
+print(equal_result)
+
+"""They are equal as e is a multiplication of all the values in a by c and we know that all values in c are equal to 1"""
 
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
-#[your code here]
-
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
+print(d_max, d_min, d_mean)
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-#[your code here]
-
+f = np.empty((2,3,5))
+#could also be empty_like(d)
 
 """
 #16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
@@ -75,10 +103,29 @@ If a value equals to d_mean, assign 50 to the corresponding value in f.
 Assign 0 to the corresponding value(s) in f for d_min in d.
 Assign 100 to the corresponding value(s) in f for d_max in d.
 In the end, f should have only the following values: 0, 25, 50, 75, and 100.
-Note: you don't have to use Numpy in this question.
-"""
+Note: you don't have to use Numpy in this question."""
 
-#[your code here]
+
+# Step 16: Populate the values in f
+
+# Step 16: Populate the values in f
+for i in range(d.shape[0]):
+    for j in range(d.shape[1]):
+        for k in range(d.shape[2]):
+            if d[i, j, k] == d_min:
+                f[i, j, k] = 0
+            elif d[i, j, k] == d_max:
+                f[i, j, k] = 100
+            elif d[i, j, k] == d_mean:
+                f[i, j, k] = 50
+            elif d[i, j, k] < d_mean:
+                f[i, j, k] = 25
+            else:
+                f[i, j, k] = 75
+
+
+
+
 
 
 
@@ -104,8 +151,10 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
 
-#[your code here]
+print(d)
+print(f)
 
+#I do not have what was expected or I do not know what to expect
 
 
 """
@@ -121,4 +170,29 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
 Again, you don't need Numpy in this question.
 """
 
-#[your code here]
+# Define a dictionary to map numerical values to string labels
+label_letters = {
+    0: "A",
+    25: "B",
+    50: "C",
+    75: "D",
+    100: "E"
+}
+
+# Step 16a  Populate the values in f with string labels
+for i in range(d.shape[0]):
+    for j in range(d.shape[1]):
+        for k in range(d.shape[2]):
+            value = d[i, j, k]
+            if value == d_min:
+                f[i, j, k] = label_letters[0]
+            elif value == d_max:
+                f[i, j, k] = label_letters[100]
+            elif value == d_mean:
+                f[i, j, k] = label_letters[50]
+            elif value < d_mean:
+                f[i, j, k] = label_letters[25]
+            else:
+                f[i, j, k] = label_letters[75]
+#does not work correctly, issie on float 
+print(f)
