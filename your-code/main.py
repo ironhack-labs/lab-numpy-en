@@ -1,11 +1,12 @@
 #1. Import the NUMPY package under the name np.
 
 #[your code here]
-
+import numpy as np
 
 #2. Print the NUMPY version and the configuration.
 
 #[your code here]
+print(np.version.version)
 
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
@@ -13,60 +14,93 @@
 
 #[your code here]
 
+a = np.random(2, 3, 5)
+
 #4. Print a.
 
 #[your code here]
+
+print(a)
+
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
 #[your code here]
+b = np.ones(5, 2, 3)
 
 #6. Print b.
 
 #[your code here]
+print(b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
 #[your code here]
 
+if a.shape == b.shape:
+    print("A & B have the same shape")
+else:
+    print("A & B have different shapes")
+
 #8. Are you able to add a and b? Why or why not?
 
 #[your code here]
+#You can add a and b as long as they have compatible shapes
+
+arr_sum = a + b
+print(arr_sum)
 
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
 #[your code here]
 
+c = np.transpose(b)
+print(c)
+
+
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
 #[your code here]
 
+d = a + c
+
+#now it's working because a and c don't have shape compatibility issues
+
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
 #[your code here]
+print(a)
+print(d)
+
+# array a contains random numbers and d is the result of adding a with the transposed version of b (c). 
 
 
 #12. Multiply a and c. Assign the result to e.
 
 #[your code here]
+e = a * c
+print(e)
 
 
 #13. Does e equal to a? Why or why not?
 
 #[your code here]
+# yes they are equal because a * c = a when elements in c are equal to 1.
 
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
 #[your code here]
-
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
 #[your code here]
-
+f = np.empty_like(d)
 
 """
 #16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
@@ -79,10 +113,25 @@ Note: you don't have to use Numpy in this question.
 """
 
 #[your code here]
+f_values = []
+for i in range(d.shape[0]):
+    for j in range(d.shape[1]):
+        for k in range(d.shape[2]):
+            
+            x = d[i, j, k]
 
+            if x > d_min and x < d_mean:
+                f_values.append(25)
+            elif x > d_mean and x < d_max:
+                f_values.append(75)
+            elif x == d_mean:
+                f_values.append(50)
+            elif x == d_min:
+                f_values.append(0)
+            elif x == d_max:
+                f_values.append(100)
 
-
-
+f = np.array(f_values).reshape(d.shape)
 """
 #17. Print d and f. Do you have your expected f?
 For instance, if your d is:
@@ -105,6 +154,9 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
 """
 
 #[your code here]
+print(d)
+print(f)
+
 
 
 
