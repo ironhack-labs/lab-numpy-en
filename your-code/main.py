@@ -1,10 +1,8 @@
+
 #1. Import the NUMPY package under the name np.
-
-import NUMPY as np
-
+import numpy as np
 #2. Print the NUMPY version and the configuration.
-
-print(np._version)
+print("NumPy Version:", np.__version__)
 np.show_config()
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
@@ -43,7 +41,7 @@ print(a.size == b.size)
 
 #8. Are you able to add a and b? Why or why not?
 
-print(a + b)
+#print(a + b)
 
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
