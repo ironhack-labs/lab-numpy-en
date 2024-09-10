@@ -1,15 +1,21 @@
 #1. Import the NUMPY package under the name np.
 
 #[your code here]
-
+import numpy as np
 
 #2. Print the NUMPY version and the configuration.
+print(np.version.version)
 
 #[your code here]
 
-
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
+
+a = np.random.rand(2, 3, 5)
+
+# Print the generated vector
+
+print(a)
 
 #[your code here]
 
@@ -19,40 +25,60 @@
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
+b = np.ones((5, 2, 3))
+
 #[your code here]
 
 #6. Print b.
 
+print(b)
+
 #[your code here]
 
 #7. Do a and b have the same size? How do you prove that in Python code?
+b.size == a.size  #note to self -  they can the same size because they have the same number of elements
 
 #[your code here]
 
 #8. Are you able to add a and b? Why or why not?
+
+print(a+b) #error given - "ValueError: operands could not be broadcast together with shapes (2,3,5) (5,2,3)"" 
 
 #[your code here]
 
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
+c = b.transpose((1, 2, 0))
+
 #[your code here]
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
+d = a + c
+
 #[your code here]
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
+
+print(a)
+print(d)
+
+#the values in the array 'd' are the result of the creating a np.ones in the variable 'b' array and then transpose to the variable 'c' that then is added to 'a' assinged to the variable 'd' so the are added to 'a and results is adding 1 to each element 
 
 #[your code here]
 
 
 #12. Multiply a and c. Assign the result to e.
 
-#[your code here]
+e = a * c
 
+#[your code here]
+print(e)
 
 #13. Does e equal to a? Why or why not?
+
+print(e == a) #because 'c' is an array of ones that is the result transposed 'b' and by mulplying by one gives the same result 
 
 #[your code here]
 
@@ -60,10 +86,17 @@
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
+
+
 #[your code here]
 
-
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
+
+f = np.empty((2, 3, 5), dtype=str)
+
 
 #[your code here]
 
@@ -77,14 +110,27 @@ Assign 100 to the corresponding value(s) in f for d_max in d.
 In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
+for s in range(d.shape[0]):
+    for u in range(d.shape[1]):
+        for m in range(d.shape[2]):
+            if d_min < d[s, u, m] < d_mean:
+                f[s, u, m] = 25
+            elif d_mean < d[s, u, m] < d_max:
+                f[s, u, m] = 75
+            elif d[s, u, m] == d_mean:
+                f[s, u, m] = 50
+            elif d[s, u, m] == d_min:
+                f[s, u, m] = 0
+            elif d[s, u, m] == d_max:
+                f[s, u, m] = 100
+                                                 
+print(f)
 
 #[your code here]
 
 
-
-
 """
-#17. Print d and f. Do you have your expected f?
+#17. Print d and f. Do you have your expected f? Yes i got the expect result 
 For instance, if your d is:
 array([[[1.85836099, 1.67064465, 1.62576044, 1.40243961, 1.88454931],
         [1.75354326, 1.69403643, 1.36729252, 1.61415071, 1.12104981],
@@ -105,6 +151,8 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
 """
 
 #[your code here]
+print(d)
+print(f)
 
 
 
@@ -120,5 +168,21 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
 """
+f_str = np.empty((2, 3, 5), dtype=str)
+
+for s in range(d.shape[0]):
+    for u in range(d.shape[1]):
+        for m in range(d.shape[2]):
+            if d_min < d[s, u, m] < d_mean:
+                f_str[s, u, m] = 'B'
+            elif d_mean < d[s, u, m] < d_max:
+                f_str[s, u, m] = 'D'
+            elif d[s, u, m] == d_mean:
+                f_str[s, u, m] = 'C'
+            elif d[s, u, m] == d_min:
+                f_str[s, u, m] = 'A'
+            elif d[s, u, m] == d_max:
+                f_str[s, u, m] = 'E'
+
 
 #[your code here]
