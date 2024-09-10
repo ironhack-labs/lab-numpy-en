@@ -131,9 +131,11 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
 """
-f = np.where(d < d_min, "A", f)
-f = np.where((d >= d_min) & (d < d_mean), "B", f)
-f = np.where((d >= d_mean) & (d < d_max), "C", f)
-f = np.where(d >= d_max, "D", f)
+f = np.empty((2, 3, 5), dtype=str)
+f = np.where(d == d_max, 'E', f)
+f = np.where(d == d_min, 'A', f)
+f = np.where((d > d_min) & (d < d_mean), 'B', f)
+f = np.where(d == d_mean, 'C', f)
+f = np.where((d > d_mean) & (d < d_max), 'D', f)
 
 print(f"f = {f}")
