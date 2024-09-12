@@ -166,4 +166,5 @@ for i in range(len(d)):
 
 for row in f:
         print(row)
+        
 # Need to check why the output is not the same as the expected output***
