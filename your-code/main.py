@@ -1,71 +1,82 @@
 #1. Import the NUMPY package under the name np.
-
+import numpy as np
 #[your code here]
 
 
 #2. Print the NUMPY version and the configuration.
-
-#[your code here]
-
+print(np.version.version)
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
-#[your code here]
+a = np.random.random((2,3,5))
 
 #4. Print a.
-
+print(a)
 #[your code here]
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
+b = np.ones((5,2,3))
 
 #[your code here]
 
 #6. Print b.
+print(b)
 
-#[your code here]
 
 #7. Do a and b have the same size? How do you prove that in Python code?
-
+print(a.size == b.size)
 #[your code here]
 
 #8. Are you able to add a and b? Why or why not?
 
-#[your code here]
-
-
+#no because of different shapes
+print(a.shape)
+print(b.shape)
+print(a.shape == b.shape)
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
 #[your code here]
+c = b.transpose(1,2,0)
+print(f"c {c}")
+
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
-#[your code here]
+d = a + c
+print(d)
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
 #[your code here]
-
+print(f"a {a}")
+print(f"d {d}")
 
 #12. Multiply a and c. Assign the result to e.
 
 #[your code here]
+e = np.multiply(a,c)
 
+print(f"e {e}")
 
 #13. Does e equal to a? Why or why not?
 
 #[your code here]
-
+print(np.array_equal(a, e))
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
 #[your code here]
-
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
 #[your code here]
+f = np.empty((2,3,5))
+print(f"f {f}")
 
 
 """
@@ -79,12 +90,16 @@ Note: you don't have to use Numpy in this question.
 """
 
 #[your code here]
-
-
-
+f[(d > d_mean) & (d < d_max)] = 75
+f[(d > d_min) & (d < d_mean)] = 25
+f[d == d_mean] = 50
+f[d == d_min] = 0
+f[d == d_max] = 100
 
 """
 #17. Print d and f. Do you have your expected f?
+
+
 For instance, if your d is:
 array([[[1.85836099, 1.67064465, 1.62576044, 1.40243961, 1.88454931],
         [1.75354326, 1.69403643, 1.36729252, 1.61415071, 1.12104981],
@@ -105,7 +120,8 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
 """
 
 #[your code here]
-
+print(f"f {f}")
+print(f"d {d}")
 
 
 """
