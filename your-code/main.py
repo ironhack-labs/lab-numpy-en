@@ -1,72 +1,74 @@
-#1. Import the NUMPY package under the name np.
+# 1. Import the NUMPY package under the name np.
+import numpy as np
 
-#[your code here]
+# 2. Print the NUMPY version and the configuration.
 
+print(f"numpy version: {np.version.full_version}")
+print(f"numpy configuration: {np.show_config()}")
 
-#2. Print the NUMPY version and the configuration.
-
-#[your code here]
-
-
-#3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
+# 3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
-#[your code here]
+a = np.random.random((2, 3, 5))
 
-#4. Print a.
+# 4. Print a.
 
-#[your code here]
-#5. Create a 5x2x3 3-dimensional array with all values equaling 1.
-#Assign the array to variable "b"
+print(a)
 
-#[your code here]
+# 5. Create a 5x2x3 3-dimensional array with all values equaling 1.
+# Assign the array to variable "b"
 
-#6. Print b.
+b = np.ones((5, 2, 3))
 
-#[your code here]
+# 6. Print b.
 
-#7. Do a and b have the same size? How do you prove that in Python code?
+print(b)
 
-#[your code here]
+# 7. Do a and b have the same size? How do you prove that in Python code?
 
-#8. Are you able to add a and b? Why or why not?
+print(np.array(a).size == np.array(b).size)
 
-#[your code here]
+# 8. Are you able to add a and b? Why or why not?
 
+try:
+    a + b
+    print("Yes, can be merged together")
+except Exception as e:
+    print(f"No, a {e.__class__.__name__} occured")
 
-#9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
+# 9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
-#[your code here]
+c = np.transpose(b, (1, 2, 0))
 
-#10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
+# 10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
-#[your code here]
+d = a + c
 
-#11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
+# 11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-#[your code here]
+print(a)
+print(d)
 
+# 12. Multiply a and c. Assign the result to e.
 
-#12. Multiply a and c. Assign the result to e.
+e = a * c
 
-#[your code here]
+# 13. Does e equal to a? Why or why not?
 
+# yes because to the values of 0 has been added.
+print(np.array_equal(a, e))
 
-#13. Does e equal to a? Why or why not?
+# 14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
-#[your code here]
+d_max = np.array(d).max()
+d_min = np.array(d).min()
+d_mean = np.array(d).mean()
 
+print(d_max, d_min, d_mean)
 
+# 15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-#14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
-
-#[your code here]
-
-
-#15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
-
-#[your code here]
-
+f = np.empty((2, 3, 5))
 
 """
 #16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
@@ -78,10 +80,11 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
-#[your code here]
-
-
-
+f = np.where((d > d_min) & (d < d_mean), 25, f)
+f = np.where((d > d_mean) & (d < d_max), 75, f)
+f = np.where(d == d_mean, 50, f)
+f = np.where(d == d_min, 0, f)
+f = np.where(d == d_max, 100, f)
 
 """
 #17. Print d and f. Do you have your expected f?
@@ -104,9 +107,8 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
 
-#[your code here]
-
-
+print(d)
+print(f)
 
 """
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
@@ -121,4 +123,11 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
 Again, you don't need Numpy in this question.
 """
 
-#[your code here]
+g = f.copy()
+f = np.where(g == 0, 'A', f)
+f = np.where(g == 25, 'B', f)
+f = np.where(g == 50, 'C', f)
+f = np.where(g == 75, 'D', f)
+f = np.where(g == 100, 'E', f)
+
+print(f)
