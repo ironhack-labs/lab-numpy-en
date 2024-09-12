@@ -63,6 +63,8 @@ print("Shape of d: ", result.shape)
 #[your code here]
 print("Shape of d: ", result.shape)
 
+
+
 #12. Multiply a and c. Assign the result to e.
 # The array d adds 1 to each corresponding element of array a due to the addition to array c which is made up of ones.
 #[your code here]
@@ -82,9 +84,10 @@ print("Result of a * c:", e)
 
 #[your code here]
 d = np.array([10, 20, 30, 40, 50])
-d_max = np.max(d)
-d_min = np.min(d)
-d_mean = np.mean(d)
+d_max = d.max()
+d_min = d.min()
+d_mean = d.mean()
+print(d_max, d_min, d_mean)
 
 # Print the results
 print(f"Maximum value: {d_max}")
@@ -113,23 +116,6 @@ Note: you don't have to use Numpy in this question.
 """
 
 #[your code here]
-d = np.array([[[10, 20, 30, 40, 50],
-               [15, 25, 35, 45, 55],
-               [12, 22, 32, 42, 52]],
-              
-              [[11, 21, 31, 41, 51],
-               [14, 24, 34, 44, 54],
-               [13, 23, 33, 43, 53]]])
-
-# Calculate d_min, d_max, and d_mean
-d_max = np.max(d)
-d_min = np.min(d)
-d_mean = np.mean(d)
-
-# Create an empty array f with the same shape as d
-f = np.empty(d.shape)
-
-# Populate the values in f based on the conditions
 for index, value in np.ndenumerate(d):
     if value == d_min:
         f[index] = 0
@@ -141,10 +127,7 @@ for index, value in np.ndenumerate(d):
         f[index] = 25
     elif d_mean < value < d_max:
         f[index] = 75
-
-# Print the result
-print(f"Array d:\n{d}")
-print(f"Array f:\n{f}")
+print(f)
 
 
 
