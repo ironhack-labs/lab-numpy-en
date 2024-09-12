@@ -1,71 +1,104 @@
 #1. Import the NUMPY package under the name np.
 
 #[your code here]
-
+import numpy as np
 
 #2. Print the NUMPY version and the configuration.
 
 #[your code here]
-
+np.show_config()
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
 #[your code here]
+a = np.random.random((2,3,5))
+
 
 #4. Print a.
-
 #[your code here]
+print(a)
+
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
 #[your code here]
+b = np.ones((5,2,3))
 
 #6. Print b.
 
 #[your code here]
+print(b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
 #[your code here]
+if a.size == b.size:
+    print("Yes, they have the same size")
+else:
+    print("No, they don't have the same size")
 
 #8. Are you able to add a and b? Why or why not?
 
 #[your code here]
-
+print("Shape of a: ", a.shape)
+print("Shape of b: ", b.shape)
+# c = a + b #it doesn't work it gives an error
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
 #[your code here]
+c = np.transpose(b, (1,2,0))
+print("Shape of c: ", c.shape)
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
 #[your code here]
+result = a + c
+print("Shape of d: ", result.shape)
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
 #[your code here]
-
+print("Shape of d: ", result.shape)
 
 #12. Multiply a and c. Assign the result to e.
 
 #[your code here]
-
+e = a * c
+print("Array a:", a)
+print("Array c:", c)
+print("Result of a * c:", e)
 
 #13. Does e equal to a? Why or why not?
 
 #[your code here]
 
 
+#Its not equal because the shape of a is (2,3,5) and the shape of e is (2,3,5)
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
 #[your code here]
+d = np.array([10, 20, 30, 40, 50])
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
 
+# Print the results
+print(f"Maximum value: {d_max}")
+print(f"Minimum value: {d_min}")
+print(f"Mean value: {d_mean}")
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
 #[your code here]
+d = np.random.rand(2, 3, 5)  # Example array, you can replace this with your actual array
+
+f = np.empty(d.shape)
+
+print(f"Shape of f: {f.shape}")
+print(f"Array f:\n{f}"))
 
 
 """
