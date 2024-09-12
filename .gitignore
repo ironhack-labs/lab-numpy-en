@@ -2,4 +2,5 @@
 **/*.ipynb_checkpoints/
 **/__pycache__
 node_modules/
-
+venv/
+day_4().code-workspace
