@@ -7,6 +7,7 @@ import numpy as np
 
 #[your code here]
 np.show_config()
+print(np.__version__).
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
@@ -39,7 +40,7 @@ else:
     print("No, they don't have the same size")
 
 #8. Are you able to add a and b? Why or why not?
-
+# Arrays a and b cannot be added directly because their shapes (2, 3, 5) and (5, 2, 3) don't align.
 #[your code here]
 print("Shape of a: ", a.shape)
 print("Shape of b: ", b.shape)
@@ -63,7 +64,7 @@ print("Shape of d: ", result.shape)
 print("Shape of d: ", result.shape)
 
 #12. Multiply a and c. Assign the result to e.
-
+# The array d adds 1 to each corresponding element of array a due to the addition to array c which is made up of ones.
 #[your code here]
 e = a * c
 print("Array a:", a)
@@ -71,7 +72,7 @@ print("Array c:", c)
 print("Result of a * c:", e)
 
 #13. Does e equal to a? Why or why not?
-
+#Yes, because multiplying by one doesn't change the values.
 #[your code here]
 
 
@@ -112,7 +113,38 @@ Note: you don't have to use Numpy in this question.
 """
 
 #[your code here]
+d = np.array([[[10, 20, 30, 40, 50],
+               [15, 25, 35, 45, 55],
+               [12, 22, 32, 42, 52]],
+              
+              [[11, 21, 31, 41, 51],
+               [14, 24, 34, 44, 54],
+               [13, 23, 33, 43, 53]]])
 
+# Calculate d_min, d_max, and d_mean
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
+
+# Create an empty array f with the same shape as d
+f = np.empty(d.shape)
+
+# Populate the values in f based on the conditions
+for index, value in np.ndenumerate(d):
+    if value == d_min:
+        f[index] = 0
+    elif value == d_max:
+        f[index] = 100
+    elif value == d_mean:
+        f[index] = 50
+    elif d_min < value < d_mean:
+        f[index] = 25
+    elif d_mean < value < d_max:
+        f[index] = 75
+
+# Print the result
+print(f"Array d:\n{d}")
+print(f"Array f:\n{f}")
 
 
 
@@ -138,7 +170,8 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
 """
 
 #[your code here]
-
+print(f"Array d:\n{d}")
+print(f"Array f:\n{f}")
 
 
 """
