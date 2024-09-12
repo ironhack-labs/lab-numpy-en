@@ -1,71 +1,89 @@
 #1. Import the NUMPY package under the name np.
 
-#[your code here]
+import numpy as np
 
 
 #2. Print the NUMPY version and the configuration.
 
-#[your code here]
+print (np.version.version)
 
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
+a = np.random.random((2,3,5))
+a = np.random.rand(2,3,5)
+a = np.random.random_sample((2,3,5))
+ 
 
-#[your code here]
 
 #4. Print a.
+print (a)
 
-#[your code here]
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
-#[your code here]
+b = np.ones((5,2,3))
 
 #6. Print b.
 
-#[your code here]
+print (b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
-#[your code here]
+if len(a) == len(b):
+        print("a and b have the same size")
+else:
+        print("a and b have different sizes")
 
 #8. Are you able to add a and b? Why or why not?
 
-#[your code here]
+# No, you can´t as they are as they have different shapes (2,3,5) vs (5,2,3), but you can add them if you transpose them.
 
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
-#[your code here]
+c = b.transpose((1, 2, 0))
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
-#[your code here]
+d = a + c
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-#[your code here]
+print (a)
+print (d)
 
+result_ad = a == d
+print (result_ad)
+
+# "d" is the sum of "a" and "c" and as all the values in "c" are 1, so the values in "d" are also 1 + the values in "a".
 
 #12. Multiply a and c. Assign the result to e.
 
-#[your code here]
+e = a * c
+print (e)
 
 
 #13. Does e equal to a? Why or why not?
 
-#[your code here]
+result_ea = e == a
+print (result_ea)
 
-
+# Yes, as "e" is just the multiplication of "a" and "c" which is 1 and any number multiplied by 1 is that number.
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
-#[your code here]
+d_max = np.max(d)
+print (d_max)
+d_min = np.min(d)
+print (d_min)  
+d_mean = np.mean(d)
+print (d_mean)
 
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-#[your code here]
+f = np.empty((2, 3, 5))
 
 
 """
@@ -77,11 +95,20 @@ Assign 100 to the corresponding value(s) in f for d_max in d.
 In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
-
-#[your code here]
-
-
-
+index = 0
+for i in range(len(d)):
+        for j in range(len(d[i])):
+                for k in range(len(d[i][j])):
+                        if d[i][j][k] > d_min and d[i][j][k] < d_mean:
+                                f[i][j][k] = 25
+                        elif d[i][j][k] > d_mean and d[i][j][k] < d_max:
+                                f[i][j][k] = 75
+                        elif d[i][j][k] == d_mean:
+                                f[i][j][k] = 50
+                        elif d[i][j][k] == d_min:
+                                f[i][j][k] = 0
+                        elif d[i][j][k] == d_max:
+                                f[i][j][k] = 100
 
 """
 #17. Print d and f. Do you have your expected f?
@@ -103,10 +130,8 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 75.,  75.,  75.,  75.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
-
-#[your code here]
-
-
+print (d)
+print(f)
 
 """
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
@@ -120,5 +145,25 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
 """
+f = [[[ "" for _ in range(len(d[0][0]))]
+for _ in range(len(d[0]))] 
+for _ in range(len(d))]
 
-#[your code here]
+index = 0
+for i in range(len(d)):
+        for j in range(len(d[i])):
+                for k in range(len(d[i][j])):
+                        if d[i][j][k] > d_min and d[i][j][k] < d_mean:
+                                f[i][j][k] = "A"
+                        elif d[i][j][k] > d_mean and d[i][j][k] < d_max:
+                                f[i][j][k] = "B"
+                        elif d[i][j][k] == d_mean:
+                                f[i][j][k] = "C"
+                        elif d[i][j][k] == d_min:
+                                f[i][j][k] = "D"
+                        elif d[i][j][k] == d_max:
+                                f[i][j][k] = "E"
+
+for row in f:
+        print(row)
+# Need to check why the output is not the same as the expected output***
