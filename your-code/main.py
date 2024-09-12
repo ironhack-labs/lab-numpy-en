@@ -150,19 +150,20 @@ for _ in range(len(d[0]))]
 for _ in range(len(d))]
 
 index = 0
-for i in range(len(d)):
-        for j in range(len(d[i])):
-                for k in range(len(d[i][j])):
-                        if d[i][j][k] > d_min and d[i][j][k] < d_mean:
-                                f[i][j][k] = "A"
-                        elif d[i][j][k] > d_mean and d[i][j][k] < d_max:
-                                f[i][j][k] = "B"
-                        elif d[i][j][k] == d_mean:
-                                f[i][j][k] = "C"
-                        elif d[i][j][k] == d_min:
-                                f[i][j][k] = "D"
-                        elif d[i][j][k] == d_max:
-                                f[i][j][k] = "E"
+f = np.empty((2, 3, 5), dtype=str)
+for i in range(d.shape[0]):
+        for j in range(d.shape[1]):
+                for k in range(d.shape[2]):
+                        if d[i, j, k] == d_max:
+                                f[i, j, k] = 'E'
+                        elif d[i, j, k] == d_min:
+                                f[i, j, k] = 'A'
+                        elif d[i, j, k] > d_mean:
+                                f[i, j, k] = 'D'
+                        elif d[i, j, k] < d_mean:
+                                f[i, j, k] = 'B'
+                        else:
+                                f[i, j, k] = 'C'
 
 for row in f:
         print(row)
