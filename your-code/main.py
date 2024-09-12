@@ -1,72 +1,73 @@
 #1. Import the NUMPY package under the name np.
 
-#[your code here]
-
+import numpy as np
 
 #2. Print the NUMPY version and the configuration.
 
-#[your code here]
+print(np.__version__)
+np.show_config()
 
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
-#[your code here]
+a = np.random.random((2,3,5))
 
 #4. Print a.
 
-#[your code here]
+print(a)
+
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
-#[your code here]
+b = np.ones((5,2,3))
 
 #6. Print b.
 
-#[your code here]
+print(b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
-#[your code here]
+print(a.size == b.size)
 
 #8. Are you able to add a and b? Why or why not?
 
-#[your code here]
-
+"No because they have different shapes."
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
-#[your code here]
+c = np.transpose(b,(1, 2, 0) )
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
-#[your code here]
+d = a + c
+
+"Works because they have the same shape"
+
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-#[your code here]
-
+print(a)
+print(d)
+"Array d is the result of adding array a and array c. As a result, every element in d is exactly 1 greater than the corresponding element in a."
 
 #12. Multiply a and c. Assign the result to e.
 
-#[your code here]
-
-
+e = a * c
 #13. Does e equal to a? Why or why not?
 
-#[your code here]
-
+"Yes, e it´s equal to a because c is all ones which means everything it will be multiplied with it´s going to remain the same"
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
-#[your code here]
-
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-#[your code here]
-
+f = np.empty((2,3,5))
 
 """
 #16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
@@ -78,8 +79,19 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
-#[your code here]
-
+for i in range(2):
+    for j in range(3):
+        for k in range(5):
+            if d[i, j, k] == d_min:
+                f[i, j, k] = 0
+            elif d[i, j, k] == d_max:
+                f[i, j, k] = 100
+            elif d[i, j, k] == d_mean:
+                f[i, j, k] = 50
+            elif d_min < d[i, j, k] < d_mean:
+                f[i, j, k] = 25
+            elif d_mean < d[i, j, k] < d_max:
+                f[i, j, k] = 75    
 
 
 
@@ -104,8 +116,25 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
 
-#[your code here]
+"""I got this d:
+array([[[1.12732471, 1.25452028, 1.94567457, 1.09083661, 1.01227987],
+        [1.22226618, 1.29493644, 1.41879947, 1.08426253, 1.46483894],
+        [1.30956164, 1.7359319 , 1.08561426, 1.1559909 , 1.39219405]],
 
+       [[1.63601702, 1.31548925, 1.34606868, 1.85262858, 1.99835991],
+        [1.33914816, 1.04203732, 1.68204064, 1.20915677, 1.80204293],
+        [1.47849534, 1.50216846, 1.0824232 , 1.23289594, 1.39577436]]])
+
+And this f:
+array([[[ 25.,  25.,  75.,  25.,   0.],
+        [ 25.,  25.,  75.,  25.,  75.],
+        [ 25.,  75.,  25.,  25.,  75.]],
+
+       [[ 75.,  25.,  25.,  75., 100.],
+        [ 25.,  25.,  75.,  25.,  75.],
+        [ 75.,  75.,  25.,  25.,  75.]]])
+
+"""
 
 
 """
