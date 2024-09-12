@@ -1,73 +1,92 @@
+# %%
 #1. Import the NUMPY package under the name np.
 
-#[your code here]
-
+import numpy as np
 
 #2. Print the NUMPY version and the configuration.
 
-#[your code here]
-
+print(f"Numpy Version: {np.__version__}")
+#print(f"Numpy Config: {np.show_config('dicts')}")
+np.show_config('stdout')
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
-#[your code here]
+a = np.random.default_rng().random((2,3,5)).round(2)
 
 #4. Print a.
 
-#[your code here]
+print(a)
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
-#[your code here]
+b = np.ones((5,2,3))
 
 #6. Print b.
 
-#[your code here]
-
+print(b)
+# %%
 #7. Do a and b have the same size? How do you prove that in Python code?
 
-#[your code here]
+if a.size == b.size:
+        print(True)
+else: print(False)
 
+# %%
 #8. Are you able to add a and b? Why or why not?
 
-#[your code here]
+if a.shape == b.shape:
+        print(a+b)
+else:
+        print("The arrays don't have the same shape, they can't be summed")
 
-
+#%%
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
+# %%
 
-#[your code here]
+c = np.transpose(b, (1,2,0))
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
+# %%
 
-#[your code here]
+d = a + c
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
-
-#[your code here]
-
+# %%
+print(f"This is 'a':\n{a}")
+print(f"This is 'd':\n{d}")
+"""
+EXPLANATION
+a was created with a random method which fills the array with values from 0 to 1
+b was created from 'np.ones' which fills the array with '1's.
+Suming them results in d which is the same decimals as a with b's '1's in the units.
+"""
 
 #12. Multiply a and c. Assign the result to e.
+# %%
+e = a * c
 
-#[your code here]
-
-
+#%%
 #13. Does e equal to a? Why or why not?
+print(e == a)
+"""
+They're equal because: x * 1 = x
+"""
 
-#[your code here]
 
-
-
+#%%
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
+# %%
 
-#[your code here]
-
+d_max = d.max()
+d_min = d.min()
+d_mean = d.mean()
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
+# %%
+f = np.empty(a.shape)
 
-#[your code here]
-
-
+# %%
 """
 #16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
 If a value in d is larger than d_mean but smaller than d_max, assign 75 to the corresponding value in f.
@@ -78,11 +97,13 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
-#[your code here]
+f[(d > d_min) * (d < d_mean)] = 25
+f[(d > d_mean) * (d < d_max)] = 75
+f[d == d_mean] = 50
+f[d == d_min] = 0
+f[d == d_max] = 100
 
-
-
-
+# %%
 """
 #17. Print d and f. Do you have your expected f?
 For instance, if your d is:
@@ -104,10 +125,9 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
 
-#[your code here]
-
-
-
+print(f"This is D:\n{d}")
+print(f"This is F:\n{f}")
+#%%
 """
 #18. Bonus question: instead of using numbers (i.e. 0, 25, 50, 75, and 100), how to use string values 
 ("A", "B", "C", "D", and "E") to label the array elements? You are expecting the result to be:
@@ -120,5 +140,12 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
 """
+g = np.empty(a.shape,str)
 
-#[your code here]
+g[(d > d_min) * (d < d_mean)] = 'A'
+g[(d > d_mean) * (d < d_max)] = 'B'
+g[d == d_mean] ='C'
+g[d == d_min] = 'D'
+g[d == d_max] = 'E'
+
+print(g)
