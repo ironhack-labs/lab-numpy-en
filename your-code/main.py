@@ -1,71 +1,115 @@
 #1. Import the NUMPY package under the name np.
 
 #[your code here]
-
+import numpy as np
+print("Numpy module location:", np)
+sep = 100 * '-'
+print(sep)
 
 #2. Print the NUMPY version and the configuration.
 
 #[your code here]
-
+print("Numpy Version:", np.version.version)
+print(sep)
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
 #[your code here]
+# a = np.random.random(size=(2, 3, 5))
+a = np.random.randint(10, size=(2, 3, 5))
 
 #4. Print a.
 
 #[your code here]
+print(a)
+print(sep)
+
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
 #[your code here]
+b = np.ones((5, 2, 3))
 
 #6. Print b.
 
 #[your code here]
+print(b)
+print(sep)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
 #[your code here]
+print("Size a:", a.shape)
+print("Size b:", b.shape)
+print("a and b have same size:", a.shape == b.shape)
+print(sep)
 
 #8. Are you able to add a and b? Why or why not?
 
 #[your code here]
-
+print("No, we can't sum a and b, since both tensors have different size")
+print("tensor_sum = a + b returns ValueError: operands could not be broadcast together with shapes (2,3,5) (5,2,3)")
+print(sep)
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
 #[your code here]
+c = np.transpose(b, (1, 2, 0))
+print(c)
+print("Size a:", a.shape)
+print("Size b:", b.shape)
+print("Size c:", c.shape)
+print(sep)
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
 #[your code here]
+d = a + c
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
 #[your code here]
+print(a)
+print()
+print(d)
+print()
+print("Each value of d is the sum of each two value of a and c at the same location.\nExample: d[1,2,3] = a[1,2,3] + c[1,2,3]")
+print(sep)
 
 
 #12. Multiply a and c. Assign the result to e.
 
 #[your code here]
+e = a * c
+# e = np.multiply(a, c)
+print(e)
+print(e.shape)
+print(sep)
 
 
 #13. Does e equal to a? Why or why not?
 
 #[your code here]
-
-
+np.array_equal(a, e)
+print("Yes, e equal to a, as numpy performs an element-wise multiplication. Since c is a matrix of ones. Each value of e is multiplied by 1 and remains the same.")
+print(sep)
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
 #[your code here]
-
+d_max = d.max()
+d_min = d.min()
+d_mean = d.mean()
+print(d)
+print(d_max)
+print(d_min)
+print(d_mean)
+print(sep)
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
-
 #[your code here]
+f = np.empty(shape=(2, 3, 5))
 
 
 """
@@ -79,8 +123,29 @@ Note: you don't have to use Numpy in this question.
 """
 
 #[your code here]
+# using for loops
+# for i in range(d.shape[0]):
+#     for j in range(d.shape[1]):
+#         for k in range(d.shape[2]):
+#             value = d[i][j][k]
+#             if d_min < value < d_mean:
+#                 target_value = 25
+#             elif d_mean < value < d_max:
+#                 target_value = 75
+#             elif value == d_mean:
+#                 target_value = 50
+#             elif value == d_min:
+#                 target_value = 0
+#             elif value == d_max:
+#                 target_value = 100
+#             f[i][j][k] = target_value        
 
-
+# using vectorized operations
+f[(d > d_min) & (d < d_mean)] = 25
+f[(d > d_mean) & (d < d_max)] = 75
+f[d == d_mean] = 50
+f[d == d_min] = 0
+f[d == d_max] = 100
 
 
 """
@@ -105,7 +170,13 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
 """
 
 #[your code here]
-
+print(d_min, round(d_mean, 2), d_max)
+print()
+print(d)
+print()
+print(f)
+print("IT IS WORKING !!!")
+print(sep)
 
 
 """
@@ -122,3 +193,13 @@ Again, you don't need Numpy in this question.
 """
 
 #[your code here]
+g = np.empty(shape=(2, 3, 5), dtype=str)
+
+g[(d > d_min) & (d < d_mean)] = 'B'
+g[(d > d_mean) & (d < d_max)] = 'D'
+g[d == d_mean] = 'C'
+g[d == d_min] = 'A'
+g[d == d_max] = 'E'
+
+print(g)
+print(sep)
