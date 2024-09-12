@@ -102,7 +102,7 @@ d = np.random.rand(2, 3, 5)  # Example array, you can replace this with your act
 f = np.empty(d.shape)
 
 print(f"Shape of f: {f.shape}")
-print(f"Array f:\n{f}"))
+print(f"Array f:\n{f}")
 
 
 """
