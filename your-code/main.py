@@ -77,6 +77,8 @@ print("Result of a * c:", e)
 #Yes, because multiplying by one doesn't change the values.
 #[your code here]
 
+e = a * c
+print(np.array_equal(a, e)) # should return True
 
 #Its not equal because the shape of a is (2,3,5) and the shape of e is (2,3,5)
 
