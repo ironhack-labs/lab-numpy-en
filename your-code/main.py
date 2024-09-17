@@ -156,4 +156,4 @@ for i in range(f.shape[0]):
             elif f[i, j, k] == 100:
                 f_string[i, j, k] = 'E'
 
-print("Array f with string labels:\n", f_string)
+print("Array f with string labels:\n", f_string) 
