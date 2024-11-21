@@ -53,32 +53,41 @@ d = np.add (c, a)
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-#[your code here]
+print (f" this is a {a}")
+print (f" this is d {d}")
+# the values in d are now the ones in a increased by 1, because both arrays were added element wise (all values of b were equal to 1)
+
 
 
 #12. Multiply a and c. Assign the result to e.
 
-#[your code here]
+e = a * c
+print (e)
 
 
 #13. Does e equal to a? Why or why not?
 
-#[your code here]
+equality = (e == a)
+print(equality)
+#because every value in a is multiplied by 1
 
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
 
-#[your code here]
+print (d_max, ' ', d_min, ' ', d_mean)
 
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-#[your code here]
+f = np.empty((2, 3, 5))
 
 
 """
-"""#16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
+16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
 If a value in d is larger than d_mean but smaller than d_max, assign 75 to the corresponding value in f.
 If a value equals to d_mean, assign 50 to the corresponding value in f.
 Assign 0 to the corresponding value(s) in f for d_min in d.
@@ -87,9 +96,11 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
-#[your code here]
-
-
+f[(d > d_min) & (d < d_mean)] = 25
+f[(d > d_mean) & (d < d_max)] = 75
+f[d == d_mean] = 50
+f[d == d_min] = 0
+f[d == d_max] = 100
 
 
 """
@@ -113,7 +124,7 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
 
-#[your code here]
+print (f)
 
 
 
@@ -129,5 +140,3 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
 """
-
-#[your code here]
