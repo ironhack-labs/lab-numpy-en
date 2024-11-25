@@ -1,6 +1,6 @@
-pip install numpy
-
 #1. Import the NUMPY package under the name np.
+python --version
+
 import numpy as np
 
 
