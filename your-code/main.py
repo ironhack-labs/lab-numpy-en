@@ -1,60 +1,109 @@
 #1. Import the NUMPY package under the name np.
 
 #[your code here]
+import pandas as np
+
 
 
 #2. Print the NUMPY version and the configuration.
 
 #[your code here]
+print("NumPy:", np.__version__)
+
+
 
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
 #[your code here]
+a = np.random.random_sample((2, 3, 5))
+
+### another way 
+a = np.random.rand(2, 3, 5)
+
+
+
 
 #4. Print a.
-
 #[your code here]
+print(a)
+
+
+
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
-
 #[your code here]
+b = np.ones((5, 2, 3))
+
+
 
 #6. Print b.
-
 #[your code here]
+print(b)
+
+
 
 #7. Do a and b have the same size? How do you prove that in Python code?
-
 #[your code here]
+same_size = a.shape == b.shape
+
+# or
+print(len(a) < len(b))
+
+
 
 #8. Are you able to add a and b? Why or why not?
-
 #[your code here]
+
+b_transp = np.transpose(b, (1, 2, 0))
+
+c = a + b_transp
+print(c)   # yes, because are similar, they have the same dimention with diferent shapes.
+
 
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
-
 #[your code here]
+
+b_transp = np.transpose(b, (1, 2, 0))
+
+c = a + b_transp
+print(c)
+
+
+
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
-
 #[your code here]
+
+d = a + c  # When we "np.transpose" b it rearrange the array to the shape of "a" and "c" and "d" kept the same shape
+print(d)
+
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
-
 #[your code here]
+print(a)
+print(b)
+
+d == 2 * a + 1  # the relation is that a was duplicated in the "sum´s "c" and "d" + 1 from b
+
+
 
 
 #12. Multiply a and c. Assign the result to e.
 
 #[your code here]
+e = a * c
+print(e)
+
 
 
 #13. Does e equal to a? Why or why not?
 
 #[your code here]
+e == a # its false 
+e == a**2 + 1
 
 
 
@@ -62,10 +111,21 @@
 
 #[your code here]
 
+d_min = np.min(d)
+print(d_min)
+
+d_max = np.max(d)
+print(d_max)
+
+d_mean = np.mean(d)
+print(d_mean)
+
+
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
 #[your code here]
+f = np.empty(d.shape)
 
 
 """
@@ -79,6 +139,19 @@ Note: you don't have to use Numpy in this question.
 """
 
 #[your code here]
+for i1 in range(d.shape[0]):
+    for i2 in range(d.shape[1]):
+        for i3 in range(d.shape[2]):
+            if d[i1, i2, i3] ==d_min:
+                f[i1, i2, i3] = 0
+            elif d[i1, i2, i3] == d_mean:
+                f[i1, i2, i3] = 50
+            elif d[i1, i2, i3] == d_max:
+                f[i1, i2, i3] = 100
+            elif d_min < d[i1, i2, i3] < d_mean:
+                f[i1, i2, i3] = 25
+            elif d_mean < d[i1, i2, i3] < d_max:
+                f[i1, i2, i3] = 75
 
 
 
@@ -105,6 +178,8 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
 """
 
 #[your code here]
+print(d)
+print(f)
 
 
 
@@ -119,6 +194,31 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'D',  'D',  'D',  'D',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
+
+( 0,  25,  50,  75,  100)
+("A", "B", "C", "D", "E")
 """
 
 #[your code here]
+def map_label(value):
+    if value == 0:
+        return "A"
+    elif value == 25:
+        return "B"
+    elif value == 50:
+        return "C"
+    elif value == 75:
+        return "D"
+    elif value == 100:
+        return "E"
+    
+num_array = [[[75, 75, 75, 25, 75],
+              [75, 75, 25, 25, 25],
+              [75, 25, 75, 75, 75]]],
+[[[25, 25, 25, 25, 100],
+[75, 75, 75, 75, 75],
+[25, 75, 0, 75, 75]]]
+
+label_array = [[[ map_label(value) for value in row] for row in layer] for layer in num_array]
+
+print(label_array)
