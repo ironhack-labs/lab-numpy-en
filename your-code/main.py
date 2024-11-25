@@ -1,71 +1,79 @@
 #1. Import the NUMPY package under the name np.
 
-#[your code here]
+import numpy as np
 
 
 #2. Print the NUMPY version and the configuration.
 
-#[your code here]
+print("The Numpy Version is : {}".format(np.__version__))
 
-
-#3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
+#3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to the variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
-#[your code here]
+np.random.seed(42)
+a = np.random.rand(2, 3, 5)
 
 #4. Print a.
+print(a)
 
-#[your code here]
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
-#[your code here]
+b = np.ones((5,2,3))
 
 #6. Print b.
 
-#[your code here]
+print(b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
-#[your code here]
+print("Size of a equal to size of b : {}".format(a.shape == b.shape))
 
 #8. Are you able to add a and b? Why or why not?
 
-#[your code here]
+#We cannot add a and b because the broadcast is not compatible with the array shapes of each other
 
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
-#[your code here]
+c = b.reshape((2,3,5))
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
-#[your code here]
+d = a + c
+#It works because now the shape of both arrays are the same and compatible for addition operation
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-#[your code here]
+print(a)
+print(d)
+
+#The difference between d and a given the ones matrix of c
 
 
 #12. Multiply a and c. Assign the result to e.
 
-#[your code here]
+e = a * c
 
 
 #13. Does e equal to a? Why or why not?
 
-#[your code here]
-
-
+#e and a are equal because e is just multiplying a with ones matrix c which doesn't change the value of a
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
-#[your code here]
+d_max = d.max()
+d_min = d.min()
+d_mean = d.mean()
+
+print("Max Value in d : {}".format(d_max))
+print("Min Value in d : {}".format(d_min))
+print("Mean Value in d : {}".format(d_mean))
 
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-#[your code here]
+f = np.empty(d.shape)
 
 
 """
@@ -78,9 +86,11 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
-#[your code here]
-
-
+f[(d > d_min) & (d < d_mean)] = 25  # Assign 25 where d_min < values < d_mean
+f[(d > d_mean) & (d < d_max)] = 75  # Assign 75 where d_mean < values < d_max
+f[d == d_mean] = 50  # Assign 50 where values equal d_mean
+f[d == d_min] = 0  # Assign 0 where values equal d_min
+f[d == d_max] = 100  # Assign 100 where values equal d_max
 
 
 """
@@ -104,7 +114,8 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
 
-#[your code here]
+print(d)
+print(f)
 
 
 
@@ -120,5 +131,10 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
 """
+g = np.empty(d.shape, dtype=str)
 
-#[your code here]
+g[(d > d_min) & (d < d_mean)] = 'B'  # Assign B where d_min < values < d_mean
+g[(d > d_mean) & (d < d_max)] = 'D'  # Assign D where d_mean < values < d_max
+g[d == d_mean] = 'C'  # Assign C where values equal d_mean
+g[d == d_min] = 'A'  # Assign A where values equal d_min
+g[d == d_max] = 'E'  # Assign E where values equal d_max
