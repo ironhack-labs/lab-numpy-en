@@ -89,19 +89,19 @@ Assign 100 to the corresponding value(s) in f for d_max in d.
 In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
-for i in range(2):
-    for j in range(3):
-        for k in range(5):
-            if d[i,j,k] > d_min and d[i,j,k] < d_mean:
-                f[i,j,k] = 25
-            elif d[i,j,k] > d_mean and d[i,j,k] < d_max:
-                f[i,j,k] = 75
-            elif d[i,j,k] == d_mean:
-                f[i,j,k] = 50
-            elif d[i,j,k] == d_min:
-                f[i,j,k] = 0
-            elif d[i,j,k] == d_max:
-                f[i,j,k] = 100
+for i in range(d.shape[0]):
+        for j in range(d.shape[1]):
+                for k in range(d.shape[2]):
+                        if d[i, j, k] > d_min and d[i, j, k] < d_mean:
+                                f[i, j, k] = 25
+                        elif d[i, j, k] > d_mean and d[i, j, k] < d_max:
+                                f[i, j, k] = 75
+                        elif d[i, j, k] == d_mean:
+                                f[i, j, k] = 50
+                        elif d[i, j, k] == d_min:
+                                f[i, j, k] = 0
+                        elif d[i, j, k] == d_max:
+                                f[i, j, k] = 100
 
 
 
@@ -146,9 +146,9 @@ Again, you don't need Numpy in this question.
 """
 
 ff = np.empty((2,3,5), dtype = str)
-for i in range(2):
-    for j in range(3):
-        for k in range(5):
+for i in range(d.shape[0]):
+    for j in range(d.shape[1]):
+        for k in range(d.shape[2]):
             if d[i,j,k] > d_min and d[i,j,k] < d_mean:
                 ff[i,j,k] = 'B'
             elif d[i,j,k] > d_mean and d[i,j,k] < d_max:
