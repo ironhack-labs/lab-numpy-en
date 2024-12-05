@@ -121,12 +121,6 @@ for i in range(d.shape[0]):
                 else:
                      f[i, j, k] = 75
 
-#f[i, j, k] = arr[i, j, k] * 2 
-
-
-
-
-
 
 """
 #17. Print d and f. Do you have your expected f?
