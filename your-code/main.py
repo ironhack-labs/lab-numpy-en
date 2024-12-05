@@ -1,71 +1,80 @@
 #1. Import the NUMPY package under the name np.
 
-#[your code here]
+import numpy as np
 
 
 #2. Print the NUMPY version and the configuration.
 
-#[your code here]
+print(np.version.version)
 
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
-#[your code here]
+
+a = np.random.randint(0, 100, size=(2, 3, 5))
+b = np.random.randn(2, 3, 5)
+c = np.random.rand(2, 3, 5)
 
 #4. Print a.
-
-#[your code here]
+print(a)
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
 #Assign the array to variable "b"
 
-#[your code here]
+b = np.ones((5, 2, 3))
 
 #6. Print b.
 
-#[your code here]
+print(b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
-#[your code here]
+print(a.size == b.size)
 
 #8. Are you able to add a and b? Why or why not?
 
-#[your code here]
+# print(a+b)
+# NumPy cannot broadcast the arrays to a common shape for element-wise addition. 
+# Broadcasting rules require that the dimensions of the arrays either match or 
+# one of them is 1. Since the shapes (2, 3, 5) and (5, 2, 3) do not meet these criteria, 
+# the addition operation cannot be performed.
 
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
 
-#[your code here]
+c = b.transpose((1, 2, 0))
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
-#[your code here]
+d = a + c
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-#[your code here]
+print(a)
+print(d)
 
 
 #12. Multiply a and c. Assign the result to e.
 
-#[your code here]
+e = a * c
 
 
 #13. Does e equal to a? Why or why not?
 
-#[your code here]
+print(np.array_equal(e, a))
 
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
 
-#[your code here]
+d_max = np.max(d) 
+d_min = np.min(d) 
+d_mean = np.mean(d)
 
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-#[your code here]
+f = np.empty([2, 3, 5])
 
 
 """
@@ -78,10 +87,25 @@ In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
 
-#[your code here]
+print("\nArray 'f' before:\n", f)
+
+for i in range(d.shape[0]):
+    for j in range(d.shape[1]):
+        for k in range(d.shape[2]):
+            if d[i, j, k] == d_min:
+                f[i, j, k] = 0
+            elif d[i, j, k] == d_max:
+                f[i, j, k] = 100
+            elif d[i, j, k] == d_mean:
+                f[i, j, k] = 50
+            elif d_min < d[i, j, k] < d_mean:
+                f[i, j, k] = 25
+            elif d_mean < d[i, j, k] < d_max:
+                f[i, j, k] = 75
 
 
-
+print(d) 
+print(f)
 
 """
 #17. Print d and f. Do you have your expected f?
@@ -104,8 +128,9 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
 
-#[your code here]
 
+print(d) 
+print(f)
 
 
 """
@@ -121,4 +146,5 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
 Again, you don't need Numpy in this question.
 """
 
-#[your code here]
+
+#ValueError: could not convert string to float: 'D'
