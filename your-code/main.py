@@ -1,71 +1,82 @@
 #1. Import the NUMPY package under the name np.
-
-#[your code here]
-
+import numpy as np
 
 #2. Print the NUMPY version and the configuration.
-
-#[your code here]
-
+print("numpy version: ",np.version.version)
+'''
+1.26.4
+'''
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
-
-#[your code here]
+a = np.random.rand(2,3,5)
 
 #4. Print a.
+print("a \n",a)
 
-#[your code here]
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
+'''     I think there's an error here. if i transpose this, the shape will be 3x2x5, not 2x3x5 as stated on step 9.
+        (still, i used reshape on #9)
+'''
 #Assign the array to variable "b"
-
-#[your code here]
+b = np.ones((5,2,3))
 
 #6. Print b.
-
-#[your code here]
+print("b \n",b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
-
-#[your code here]
+print(f"\nIs a.size == b.size? \n\ta.size: {a.size} \n\tb.size: {b.size}")
 
 #8. Are you able to add a and b? Why or why not?
-
-#[your code here]
+# print(a+b)
+print ("\na+b raises a ValueError, since their shapes are different. if they were the same shape, they could be added")
+'''
+        Printing a+b raises a ValueError: operands could not be broadcast together with shapes (2,3,5) (5,2,3)
+        That is, their shapes are different
+'''
 
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
-
-#[your code here]
+c = b.T.reshape(2,3,5)
+print(c.shape)
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
-
-#[your code here]
+d = a+c
+print("a+c now works because they are both the same dimensions")
+'''
+        a+c now works because they are the same dimensions
+'''
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
-
-#[your code here]
+print("a: \n", a, "\nd: \n",d)
+'''
+        d is just a + a matrix of 1's
+'''
 
 
 #12. Multiply a and c. Assign the result to e.
-
-#[your code here]
-
+e = np.multiply(a, c)
+print(e)
 
 #13. Does e equal to a? Why or why not?
-
-#[your code here]
+print ("\na==e? ", np.array_equal(a,e), "a is equal to e because e is just a multiplied by a matrix of 1's. The matrix of 1's has the correct dimensions to be multiplied with a")
+'''
+        a is equal to e because e is just a multiplied by a matrix of 1's. 
+        The matrix of 1's has the correct dimensions to be multiplied with a
+'''
 
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
-
-#[your code here]
-
+d_max = np.amax(d)
+d_min = np.amin(d)
+d_mean = np.mean(d)
+print("d_max = ", d_max)
+print("d_mean = ", d_mean)
+print("d_min = ", d_min)
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
-
-#[your code here]
+f = np.empty(d.shape)
 
 
 """
@@ -77,9 +88,15 @@ Assign 100 to the corresponding value(s) in f for d_max in d.
 In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
-
-#[your code here]
-
+for i in range(len(d)):
+    for j in range(len(d[i])):
+        for k in range(len(d[i][j])):
+            elem = d[i][j][k]
+            if (elem == d_min): f[i][j][k] = 0
+            elif elem == d_mean: f[i][j][k] = 50
+            elif (elem > d_min) and (elem < d_mean): f[i][j][k] = 25
+            elif (elem > d_mean) and (elem < d_max): f[i][j][k] = 75
+            else: f[i][j][k] = 100
 
 
 
@@ -104,7 +121,13 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
 
-#[your code here]
+print("\nd:\n",d)
+print("\nf:\n",f)
+print("i guess i had the expected f. Gave it a quick look and values seem reasonable")
+'''
+        i guess i had the expected f. Gave it a quick look and values seem reasonable
+'''
+
 
 
 
@@ -120,5 +143,16 @@ array([[[ 'D',  'D',  'D',  'B',  'D'],
         [ 'B',  'D',   'A',  'D', 'D']]])
 Again, you don't need Numpy in this question.
 """
+g = np.empty(d.shape, dtype=str)
 
-#[your code here]
+for i in range(len(d)):
+    for j in range(len(d[i])):
+        for k in range(len(d[i][j])):
+            elem = d[i][j][k]
+            if (elem == d_min): g[i][j][k] = "A"
+            elif elem == d_mean: g[i][j][k] = "C"
+            elif (elem > d_min) and (elem < d_mean): g[i][j][k] = "B"
+            elif (elem > d_mean) and (elem < d_max): g[i][j][k] = "D"
+            else: g[i][j][k] = "E"
+
+print(g)
