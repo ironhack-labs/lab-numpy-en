@@ -5,20 +5,20 @@ import numpy as np
 
 #2. Print the NUMPY version and the configuration.
 
-# print(np.version.version)
+print(np.version.version)
 
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
 # Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
 
 a = np.random.rand(2, 3, 5) # uniformly distributed random integers
 
-# a = np.random.randint(low=0, high=10, size=(2,3,5)) #random integers
+a = np.random.randint(low=0, high=10, size=(2,3,5)) #random integers
 
-# a = np.random.normal(2,3,5) # random from a standard normal distribution
+a = np.random.normal(2,3,5) # random from a standard normal distribution
 
 #4. Print a.
 
-# print(a)
+print(a)
 
 
 #5. Create a 5x2x3 3-dimensional array with all values equaling 1.
@@ -28,7 +28,7 @@ b = np.ones((5,2,3))
 
 #6. Print b.
 
-# print(b)
+print(b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
@@ -43,7 +43,7 @@ if a.size == b.size:
 
 # a is 2x3x5, b is 5x2x3
 
-c = np.ones(b.shape).transpose(1, 2, 0) # Transpose axes to match (2, 3, 5)
+c = b.transpose(1, 2, 0) # Transpose axes to match (2, 3, 5)
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
@@ -51,8 +51,8 @@ d = a + c
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-# print(a)
-# print(d)
+print(a)
+print(d)
 
 # d is a + 1 for every position. 
 
