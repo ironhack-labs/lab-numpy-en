@@ -1,72 +1,99 @@
 #1. Import the NUMPY package under the name np.
 
-#[your code here]
+import numpy as np
 
 
 #2. Print the NUMPY version and the configuration.
-
-#[your code here]
-
-
+# Displays the NumPy version and its configuration.
+def numpy_info(arr):
+    
+    print(np.__version__)
+    
+    print(np.show_config())
+    
 #3. Generate a 2x3x5 3-dimensional array with random values. Assign the array to variable "a"
-# Challenge: there are at least three easy ways that use numpy to generate random arrays. How many ways can you find?
-
-#[your code here]
+# Generates a 2 x 3 x 5 3-D array with random values and assigns it to variable a.
+a = np.random.rand(2,3,5)
 
 #4. Print a.
 
-#[your code here]
-#5. Create a 5x2x3 3-dimensional array with all values equaling 1.
-#Assign the array to variable "b"
+print(a)
 
-#[your code here]
+#5. Create a 5x2x3 3-dimensional array with all values equaling 1.
+# Assigns a 5 x 2 x 3 array to variable b. All values in the array are equal to 1. 
+
+b = np.ones((5,2,3))
 
 #6. Print b.
 
-#[your code here]
+print(b)
 
 #7. Do a and b have the same size? How do you prove that in Python code?
 
-#[your code here]
+print(a.size == b.size)
+
 
 #8. Are you able to add a and b? Why or why not?
 
-#[your code here]
-
+# Response- a and b cannot be added together because their shapes are not compatible.
+print("a and b cannot be added together because their shapes are not compatible.")
 
 #9. Transpose b so that it has the same structure of a (i.e. become a 2x3x5 array). Assign the transposed array to varialbe "c".
+# Transposes array b so that it becomes a 2 x 3 x 5 array. This array is then
+# assigned to variable c.
+#dummy_array = np.ones(5,2,3)
 
-#[your code here]
+c = np.transpose(b, (1,2,0))
+print(c)
+print(b)
+print(a)
+
 
 #10. Try to add a and c. Now it should work. Assign the sum to varialbe "d". But why does it work now?
 
-#[your code here]
+d = a + c
+print(d)
+print("a and c can now be added because their shapes are now compatible.")
 
 #11. Print a and d. Notice the difference and relation of the two array in terms of the values? Explain.
 
-#[your code here]
+print(a)
+print(d)
+print("All the elements in d are greater than its corresponding element in a by 1.")
 
 
 #12. Multiply a and c. Assign the result to e.
 
-#[your code here]
+e = a * c
+print(e)
 
 
 #13. Does e equal to a? Why or why not?
 
-#[your code here]
-
+if np.array_equal(e,a):
+    print("They are the same")
+else:
+    print("They are not the same")
 
 
 #14. Identify the max, min, and mean values in d. Assign those values to variables "d_max", "d_min", and "d_mean"
+# Identifies the max, min and mean values for d.
+d_max = np.max(d)
+d_min = np.min(d)
+d_mean = np.mean(d)
 
-#[your code here]
-
+# Displays the max, min and mean for d.
+print(d_max)
+print(d_min)
+print(d_mean)
 
 #15. Now we want to label the values in d. First create an empty array "f" with the same shape (i.e. 2x3x5) as d using `np.empty`.
 
-#[your code here]
+#Creates an empty array f with dimensions 2 x 3 x 5 using np.empty.
+f = np.empty((2,3,5))
 
+print(f)
+print("Shape of the array:", f.shape)
 
 """
 #16. Populate the values in f. For each value in d, if it's larger than d_min but smaller than d_mean, assign 25 to the corresponding value in f.
@@ -77,11 +104,23 @@ Assign 100 to the corresponding value(s) in f for d_max in d.
 In the end, f should have only the following values: 0, 25, 50, 75, and 100.
 Note: you don't have to use Numpy in this question.
 """
-
-#[your code here]
-
-
-
+# Evaluates the value of every element in f. Based on how it compares to the max, min and mean of array d.
+# Depending on how the value compares to these, a percentile is assigned to that value.
+# This percentile replaces the original value in the array.
+for i in range(f.shape[0]):
+    for j in range(f.shape[1]):
+        for k in range(f.shape[2]):
+            if d[i,j,k] > d_min and d[i,j,k] < d_mean:
+                f[i,j,k] = 25
+            elif d[i,j,k] > d_mean and d[i,j,k] < d_max:
+                f[i,j,k] = 75
+            elif d[i,j,k] == d_mean:
+                f[i,j,k] = 50
+            elif d[i,j,k] == d_min:
+                f[i,j,k] = 0
+            else:
+                f[i,j,k] = 100
+      
 
 """
 #17. Print d and f. Do you have your expected f?
@@ -103,8 +142,8 @@ array([[[ 75.,  75.,  75.,  25.,  75.],
         [ 75.,  75.,  75.,  75.,  75.],
         [ 25.,  75.,   0.,  75.,  75.]]])
 """
-
-#[your code here]
+print(d)
+print(f)
 
 
 
